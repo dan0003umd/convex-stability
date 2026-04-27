@@ -9,7 +9,7 @@ import MethodCards from "./components/MethodCards";
 import TheoryReference from "./components/TheoryReference";
 import Footer from "./components/Footer";
 import DarkModeToggle from "./components/DarkModeToggle";
-import { RHO_DATA } from "./data";
+import { INTERP_DATA, RHO_DATA } from "./data";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -42,8 +42,8 @@ function App() {
           rhoRaw={rhoRaw}
           rhoStar={rhoStar}
         />
-        <SSSCurvesChart data={RHO_DATA} rhoStar={rhoStar} showReferenceLine={showReferenceLine} />
-        <DeltaSSSChart data={RHO_DATA} rhoStar={rhoStar} showReferenceLine={showReferenceLine} />
+        <SSSCurvesChart data={INTERP_DATA} rhoStar={rhoStar} showReferenceLine={showReferenceLine} />
+        <DeltaSSSChart data={INTERP_DATA} rhoStar={rhoStar} showReferenceLine={showReferenceLine} />
         <MethodCards data={RHO_DATA} />
         <TheoryReference />
       </main>

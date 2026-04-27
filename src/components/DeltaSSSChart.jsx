@@ -1,10 +1,9 @@
-import { motion } from "framer-motion";
+﻿import { motion } from "framer-motion";
 import {
   Area,
   AreaChart,
   CartesianGrid,
   Label,
-  ReferenceDot,
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
@@ -20,7 +19,7 @@ function DeltaTooltip({ active, payload, label }) {
 
   return (
     <div className="chart-tooltip">
-      <p className="font-mono text-xs">rho = {Number(label).toFixed(2)}</p>
+      <p className="font-mono text-xs">ρ = {Number(label).toFixed(2)}</p>
       <p className="text-xs" style={{ color: METHOD_COLORS.delta }}>
         ΔSSS: {Number(payload[0].value).toFixed(3)}
       </p>
@@ -38,20 +37,33 @@ function DeltaSSSChart({ data, rhoStar, showReferenceLine }) {
       className="scientific-card p-4 md:p-6"
     >
       <h2 className="section-title mb-2">DeltaSSS Arch Chart</h2>
-      <div className="relative h-[380px] w-full">
-        <p className="pointer-events-none absolute left-4 top-2 z-10 font-mono text-sm text-app-muted">
-          ΔSSS = SSS(Group Lasso) - SSS(Lasso)
-        </p>
+      <p
+        style={{
+          fontSize: "13px",
+          color: "var(--text-muted)",
+          fontFamily: "Inter",
+          marginBottom: "8px",
+          marginTop: "-4px",
+        }}
+      >
+        Y-axis: ΔSSS = SSS(Group Lasso) − SSS(Lasso)
+      </p>
+      <div className="h-[380px] w-full">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data} margin={{ top: 16, right: 16, left: 12, bottom: 24 }}>
+          <AreaChart data={data} margin={{ top: 20, right: 20, bottom: 40, left: 70 }}>
             <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" />
-            <XAxis dataKey="rho" stroke="var(--chart-axis)" tick={{ fill: "var(--chart-axis)", fontSize: 12 }}>
+            <XAxis
+              dataKey="rho"
+              ticks={[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99]}
+              stroke="var(--chart-axis)"
+              tick={{ fill: "var(--chart-axis)", fontSize: 12 }}
+            >
               <Label value="Intra-group Correlation ρ" position="insideBottom" offset={-8} fill="var(--chart-axis)" />
             </XAxis>
-            <YAxis stroke="var(--chart-axis)" tick={{ fill: "var(--chart-axis)", fontSize: 12 }} domain={[0, 0.72]} />
+            <YAxis width={60} stroke="var(--chart-axis)" tick={{ fill: "var(--chart-axis)", fontSize: 12 }} domain={[0, 0.72]} />
             <Tooltip content={<DeltaTooltip />} />
 
-            <ReferenceLine y={0} stroke="var(--chart-axis)" strokeDasharray="4 3" />
+            <ReferenceLine y={0} stroke="#888" strokeDasharray="4 4" strokeWidth={1} />
 
             {showReferenceLine && (
               <ReferenceLine
@@ -63,15 +75,6 @@ function DeltaSSSChart({ data, rhoStar, showReferenceLine }) {
               />
             )}
 
-            <ReferenceLine
-              segment={[
-                { x: 0.62, y: 0.705 },
-                { x: 0.5, y: 0.655 },
-              ]}
-              stroke={METHOD_COLORS.delta}
-              strokeWidth={1.5}
-            />
-
             <Area
               type="monotone"
               dataKey="delta"
@@ -82,16 +85,6 @@ function DeltaSSSChart({ data, rhoStar, showReferenceLine }) {
               isAnimationActive
               animationDuration={1200}
               animationEasing="ease-out"
-            />
-
-            <ReferenceDot
-              x={0.5}
-              y={0.655}
-              r={4}
-              fill={METHOD_COLORS.delta}
-              stroke="var(--color-surface)"
-              strokeWidth={1.5}
-              label={{ value: "Peak advantage at ρ=0.5", position: "top", fill: "var(--chart-axis)", fontSize: 12 }}
             />
           </AreaChart>
         </ResponsiveContainer>

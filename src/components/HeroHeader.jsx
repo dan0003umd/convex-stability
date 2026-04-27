@@ -34,14 +34,33 @@ function HeroHeader() {
         Dhanraj Nandurkar & Soumitra Chavan — UMD MSML604, 2026
       </motion.p>
 
-      <motion.div
-        variants={item}
-        animate={{ y: [0, 6, 0], opacity: [0.6, 1, 0.6] }}
-        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-        className="mt-10 font-mono text-xs uppercase tracking-[0.25em] text-app-muted"
+      <p
+        style={{
+          letterSpacing: "0.15em",
+          fontSize: "12px",
+          color: "var(--text-muted)",
+          fontFamily: "Inter",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "6px",
+        }}
       >
-        scroll to explore â†“
-      </motion.div>
+        SCROLL TO EXPLORE
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <line x1="12" y1="5" x2="12" y2="19" />
+          <polyline points="19 12 12 19 5 12" />
+        </svg>
+      </p>
     </motion.section>
   );
 }

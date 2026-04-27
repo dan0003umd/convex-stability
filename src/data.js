@@ -13,6 +13,49 @@ export const RHO_DATA = [
   { rho: 0.99, lasso: 0.314, ridge: 1.0, elastic_net: 0.565, group_lasso: 0.688, delta: 0.374 },
 ];
 
+export function interpolateData(data, numPoints) {
+  if (!Array.isArray(data) || data.length < 2 || numPoints < 2) {
+    return data;
+  }
+
+  const minRho = data[0].rho;
+  const maxRho = data[data.length - 1].rho;
+  const step = (maxRho - minRho) / (numPoints - 1);
+  const fields = Object.keys(data[0]).filter((key) => key !== "rho");
+
+  return Array.from({ length: numPoints }, (_, idx) => {
+    const rho = Number((minRho + step * idx).toFixed(4));
+
+    let rightIndex = data.findIndex((point) => point.rho >= rho);
+    if (rightIndex === -1) {
+      rightIndex = data.length - 1;
+    }
+    const leftIndex = Math.max(0, rightIndex - 1);
+    const left = data[leftIndex];
+    const right = data[rightIndex];
+
+    if (left.rho === right.rho) {
+      const exactPoint = { rho: Number(left.rho.toFixed(4)) };
+      fields.forEach((field) => {
+        exactPoint[field] = Number(left[field].toFixed(4));
+      });
+      return exactPoint;
+    }
+
+    const ratio = (rho - left.rho) / (right.rho - left.rho);
+    const interpolated = { rho: Number(rho.toFixed(4)) };
+
+    fields.forEach((field) => {
+      const value = left[field] + ratio * (right[field] - left[field]);
+      interpolated[field] = Number(value.toFixed(4));
+    });
+
+    return interpolated;
+  });
+}
+
+export const INTERP_DATA = interpolateData(RHO_DATA, 100);
+
 export const METHOD_COLORS = {
   lasso: "#c0392b",
   ridge: "#2471a3",

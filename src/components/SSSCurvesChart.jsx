@@ -20,7 +20,7 @@ function CustomTooltip({ active, payload, label }) {
 
   return (
     <div className="chart-tooltip">
-      <p className="font-mono text-xs">rho = {Number(label).toFixed(2)}</p>
+      <p className="font-mono text-xs">ρ = {Number(label).toFixed(2)}</p>
       {payload.map((entry) => (
         <p key={entry.dataKey} className="text-xs" style={{ color: entry.color }}>
           {entry.name}: {Number(entry.value).toFixed(3)}
@@ -50,18 +50,29 @@ function SSSCurvesChart({ data, rhoStar, showReferenceLine }) {
 
       <div className="h-[420px] w-full">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 10, right: 20, bottom: 40, left: 20 }}>
+          <LineChart data={data} margin={{ top: 10, right: 20, bottom: 40, left: 60 }}>
             <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" />
-            <XAxis dataKey="rho" stroke="var(--chart-axis)" tick={{ fill: "var(--chart-axis)", fontSize: 12 }}>
-              <Label value="Intra-group Correlation ρ" position="insideBottom" offset={-10} fill="var(--chart-axis)" />
-            </XAxis>
-            <YAxis
-              domain={[0, 1.05]}
+            <XAxis
+              dataKey="rho"
+              ticks={[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99]}
               stroke="var(--chart-axis)"
               tick={{ fill: "var(--chart-axis)", fontSize: 12 }}
             >
-              <Label value="SSS (Sparsity Stability Score)" angle={-90} position="insideLeft" fill="var(--chart-axis)" />
-            </YAxis>
+              <Label value="Intra-group Correlation ρ" position="insideBottom" offset={-10} fill="var(--chart-axis)" />
+            </XAxis>
+            <YAxis
+              width={55}
+              domain={[0, 1.05]}
+              stroke="var(--chart-axis)"
+              tick={{ fill: "var(--chart-axis)", fontSize: 12 }}
+              label={{
+                value: "SSS (Sparsity Stability Score)",
+                angle: -90,
+                position: "insideLeft",
+                offset: 10,
+                style: { textAnchor: "middle" },
+              }}
+            />
             <Tooltip content={<CustomTooltip />} />
             {showReferenceLine && (
               <ReferenceLine
