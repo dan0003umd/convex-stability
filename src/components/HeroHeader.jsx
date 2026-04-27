@@ -34,6 +34,21 @@ function HeroHeader() {
         Dhanraj Nandurkar & Soumitra Chavan — UMD MSML604, 2026
       </motion.p>
 
+      <motion.div variants={item} className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
+        <a
+          href="https://huggingface.co/spaces/Dhanraj003/sss-explorer"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-full bg-[#01696f] px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#0c4e54] hover:shadow-lg"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+          Try Live Demo
+        </a>
+        <span className="text-xs text-app-muted">Hosted on Hugging Face Spaces · Free</span>
+      </motion.div>
+
       <p
         style={{
           letterSpacing: "0.15em",
@@ -44,6 +59,7 @@ function HeroHeader() {
           flexDirection: "column",
           alignItems: "center",
           gap: "6px",
+          marginTop: "3rem",
         }}
       >
         SCROLL TO EXPLORE
