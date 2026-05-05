@@ -7,7 +7,7 @@
 
 
 **Dhanraj Nandurkar · Soumitra Chavan**
-University of Maryland — MSML 604: Advanced Machine Learning · Spring 2026
+University of Maryland - MSML 604: Advanced Machine Learning · Spring 2026
 
 [📄 Paper](#) · [🚀 Live Demo](https://huggingface.co/spaces/Dhanraj003/sss-explorer) · [📊 Results](#results) · [⚡ Quickstart](#quickstart)
 
