@@ -3,11 +3,8 @@
 # 🔬 Sparse Feature Selection via Convex Optimization
 ### An Empirical Study of Sparsity Stability under Feature Correlation
 
-[
-[
-[
-[
-[
+
+
 
 **Dhanraj Nandurkar · Soumitra Chavan**
 University of Maryland — MSML 604: Advanced Machine Learning · Spring 2026
